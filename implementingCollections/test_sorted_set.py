@@ -128,7 +128,16 @@ class TestSequenceProtocol(unittest.TestCase):
         self.assertEqual(next(r), 1)
         with self.assertRaises(StopIteration):
             next(r)
-
+    
+    def test_index_positive(self):
+        s = SortedSet([1, 5, 8, 9])
+        self.assertEqual(s.index(8), 2)
+    
+    def test_index_negative(self):
+        s = SortedSet([1, 5, 8, 9])
+        self.assertEqual(s.index(8), 2)
+        with self.assertRaises(StopIteration):
+            s.index(15)
 
 class TestiReprProtocol(unittest.TestCase):
     
