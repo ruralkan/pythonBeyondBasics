@@ -2,6 +2,9 @@
 # importing "bisect" for bisection operations 
 import bisect
 
+#we dont use collection.abc, because we've overrdiden all of the methodsinherited from collection.abc sequence
+#except dunder reverse, but  we dont need to override that because there's alredy fallback in the reversed implemetation to a dunder getitem and dunder len
+
 class SortedSet():
     def __init__(self, items = None):
         self._items = sorted(set(items)) if items is not None else []
