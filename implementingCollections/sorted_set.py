@@ -26,4 +26,21 @@ class SortedSet:
         for item in self._items:
             yield item
         """
+    
+    """The sequence protocol allows us
+    - Retrieve slices by slicing 
+	    item = seq[index]
+	    item = seq[start: stop]
+    - Find items by value
+	    index = seq.index(item)
+    - Count items
+	    num = seq.count(item)
+    - Produce a reversed sequence
+	    r = reversed(seq)
+    - Suport concatenation with + operator and repetition with * operator
+    """
+    def __getitem__(self, index):
+	    return self._items[index]
+
+
 
