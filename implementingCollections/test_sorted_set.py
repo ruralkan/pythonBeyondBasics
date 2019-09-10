@@ -136,7 +136,7 @@ class TestSequenceProtocol(unittest.TestCase):
     def test_index_negative(self):
         s = SortedSet([1, 5, 8, 9])
         self.assertEqual(s.index(8), 2)
-        with self.assertRaises(StopIteration):
+        with self.assertRaises(ValueError):
             s.index(15)
 
 class TestiReprProtocol(unittest.TestCase):
