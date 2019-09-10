@@ -1,10 +1,9 @@
 
 # importing "bisect" for bisection operations 
 from bisect import bisect_left
-#from collections.abc import Sequence
 #we dont use collection.abc, because we've overrdiden all of the methodsinherited from collection.abc sequence
 #except dunder reverse, but  we dont need to override that because there's alredy fallback in the reversed implemetation to a dunder getitem and dunder len
-
+#from collections.abc import Sequence
 from itertools import chain
 
 class SortedSet():
@@ -96,5 +95,9 @@ class SortedSet():
         This could be achieved either by passing self to the SortedSet constructuro or perhaps
         by implementing a more efficient copy method"""
         return self if rhs > 0 else SortedSet()
+    
+    def __rmul__(self, lhs):
+        return self * lhs
+
 
 
