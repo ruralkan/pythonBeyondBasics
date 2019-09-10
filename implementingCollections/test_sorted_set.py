@@ -118,6 +118,17 @@ class TestSequenceProtocol(unittest.TestCase):
     
     def test_slice_full(self):
         self.assertEqual(self.s[:], self.s)
+    
+    def test_reversed(self):
+        s = SortedSet([1, 3, 5, 7])
+        r = reversed(s)
+        self.assertEqual(next(r), 7)
+        self.assertEqual(next(r), 5)
+        self.assertEqual(next(r), 3)
+        self.assertEqual(next(r), 1)
+        with self.assertRaises(StopIteration):
+            next(r)
+
 
 class TestiReprProtocol(unittest.TestCase):
     
