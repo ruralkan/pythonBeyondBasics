@@ -61,6 +61,11 @@ class SortedSet(Sequence):
             return NotImplemented
         return self._items == rhs._items
 
-
+    #We know that the list inside our set is always sorted, we try to improve count method
+    # so we should be able to perform a  binary search for the element in a time proportional to log n 
+    def count(self, item):
+        index = bisect_left(self._items, item)
+        found = (index != len(self._items)) and (self._items[index] == item)   
+        return int(found) 
 
 
