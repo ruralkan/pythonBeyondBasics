@@ -15,3 +15,15 @@ class SortedSet:
     """
     def __len__(self):
         return len(self._items)
+    
+    """ Iterable protocol allows us obtain an iterator over the series of items with iter(iterable)
+    we use dunder iter
+    """
+    def __iter__(self):
+        return iter(self._items)
+        #We can return generators, but list iterator is likely to be faster
+        """
+        for item in self._items:
+            yield item
+        """
+

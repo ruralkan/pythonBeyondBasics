@@ -66,7 +66,7 @@ class TestIterableProtocol(unittest.TestCase):
         self.s = SortedSet([7,2,1,1,9]) 
     
     def test_iter(self):
-        i = iter(self)
+        i = iter(self.s)
         self.assertEqual(next(i),1)
         self.assertEqual(next(i),2)
         self.assertEqual(next(i),7)
