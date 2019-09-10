@@ -118,7 +118,16 @@ class TestSequenceProtocol(unittest.TestCase):
     
     def test_slice_full(self):
         self.assertEqual(self.s[1:], self.s)
-        
+
+class TestiReprProtocol(unittest.TestCase):
+    
+    def test_repr_empty(self):
+        s = SortedSet()
+        self.assertEqual(repr(s), "SortedSet()")
+    
+    def test_repr_some(self):
+        s = SortedSet([42,40,19])
+        self.assertEqual(repr(s), "SortedSet([19,40,42])")
 
 
     
