@@ -10,10 +10,12 @@ class SortedSet(Sequence):
     Our dunder contains implementation will just use the membership test on the enclosed list object
     """
     def __contains__(self, item):
-        index = bisect_left(self._items, item)
-        found = (index != len(self._items)) and (self._items[index] == item)
-        return int(found)
-    
+        try:
+            self._item(index)
+            return True
+        except ValueError:
+            return False
+            
     """To obtain the len of items use dunder len method
     The sized protocol allows us to determine how many items are in a collection by passing it to the len built- in function
     """
@@ -62,6 +64,15 @@ class SortedSet(Sequence):
         if not isinstance(rhs, SortedSet):
             return NotImplemented
         return self._items == rhs._items
+
+    #We know that the list inside our set is always sorted, we try to improve index search
+    #We implement dindex method
+    def index(self, item):
+        index = bisect_left(self._items, item)
+        if (index != len(self._items)) and (self._items[index] == item):
+            return index
+        raise ValueError("{} not found".format(repr(item)))
+    
 
     #We know that the list inside our set is always sorted, we try to improve count method
     #We override the count implementation
