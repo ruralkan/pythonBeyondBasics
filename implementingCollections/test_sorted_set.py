@@ -22,6 +22,8 @@ class TestConstruction(unittest.TestCase):
         g = gen6842()
         s = SortedSet(g)
     
+    def test_default_empty(self):
+        s= SortedSet()
 
 if __name__ == '__main__':
     unittest.main()
