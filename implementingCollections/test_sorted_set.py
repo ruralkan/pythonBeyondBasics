@@ -103,6 +103,23 @@ class TestSequenceProtocol(unittest.TestCase):
     def test_index_one_before_the_beginning(self):
         with self.assertRaises(IndexError):
             self.s[-6]
+    
+    def test_slice_from_start(self):
+        self.assertEqual(self.s[:3], SortedSet([1,4,9]))
+    
+    def test_slice_to_end(self):
+        self.assertEqual(self.s[3:], SortedSet([13,15]))
+    
+    def test_slice_empty(self):
+        self.assertEqual(self.s[10:], SortedSet())
+    
+    def test_slice_arbitrary(self):
+        self.assertEqual(self.s[2:4], SortedSet([9,13]))
+    
+    def test_slice_full(self):
+        self.assertEqual(self.s[1:], self.s)
+        
+
 
     
 if __name__ == '__main__':
