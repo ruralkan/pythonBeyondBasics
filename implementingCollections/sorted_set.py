@@ -1,9 +1,11 @@
 
 # importing "bisect" for bisection operations 
-import bisect
-
+from bisect import bisect_left
+#from collections.abc import Sequence
 #we dont use collection.abc, because we've overrdiden all of the methodsinherited from collection.abc sequence
 #except dunder reverse, but  we dont need to override that because there's alredy fallback in the reversed implemetation to a dunder getitem and dunder len
+
+from itertools import chain
 
 class SortedSet():
     def __init__(self, items = None):
@@ -26,7 +28,7 @@ class SortedSet():
     """
     def __len__(self):
         return len(self._items)
-    
+
     """ Iterable protocol allows us obtain an iterator over the series of items with iter(iterable)
     we use dunder iter
     """
@@ -59,7 +61,7 @@ class SortedSet():
         return "SortedSet({})".format(
             repr(self._items) if self._items else ''
         )
-    
+
     def __eq__(self, rhs):
         if not isinstance(rhs, SortedSet):
             return NotImplemented
@@ -68,12 +70,12 @@ class SortedSet():
     def __ne__(self, rhs):
         if not isinstance(rhs, SortedSet):
             return NotImplemented
-        return self._items == rhs._items
+        return self._items != rhs._items
 
     #We know that the list inside our set is always sorted, we try to improve index search
     #We implement dindex method
     def index(self, item):
-        index = bisect.bisect_left(self._items, item)
+        index = bisect_left(self._items, item)
         if (index != len(self._items)) and (self._items[index] == item):
             return index
         raise ValueError("{} not found".format(repr(item)))
@@ -83,6 +85,16 @@ class SortedSet():
     #We override the count implementation
     # so we should be able to perform a  binary search for the element in a time proportional to log n 
     def count(self, item):
-        return int(item in self._items) 
+        return int(item in self) 
+    
+    def __add__(self, rhs):
+        return SortedSet(chain(self._items, rhs._items))
+    
+    def __mult__(self, rhs):
+        """Note: the only reason wecan return simpy self is because our SortedSet object are immutable,
+        If or when they are made mutable, it would be necessary to return a copy of the self object
+        This could be achieved either by passing self to the SortedSet constructuro or perhaps
+        by implementing a more efficient copy method"""
+        return self if rhs > 0 else SortedSet()
 
 
