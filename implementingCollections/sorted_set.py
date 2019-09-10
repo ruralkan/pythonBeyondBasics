@@ -40,7 +40,9 @@ class SortedSet:
     - Suport concatenation with + operator and repetition with * operator
     """
     def __getitem__(self, index):
-	    return self._items[index]
+        """This is a more sophisticate version of dunder getitem, which detects wheter it's being called with an index or a slice and acts accordingly""" 
+        result = self._items[index]
+        return SortedSet(result) if isinstance(index, slice) else result
 
 
 
