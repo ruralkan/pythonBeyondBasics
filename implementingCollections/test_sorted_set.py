@@ -1,5 +1,5 @@
 import unittest
-from collections.abc import (Container, Sized, Iterable, Sequence)
+from collections.abc import (Container, Sized, Iterable, Sequence, Set)
 from sorted_set import SortedSet
 
 class TestConstruction(unittest.TestCase):
@@ -224,7 +224,7 @@ class TestEqualityProtocol(unittest.TestCase):
         s = SortedSet([10,11,12])
         self.assertTrue(s == s)
 
-lass TestInequalityProtocol(unittest.TestCase):
+class TestInequalityProtocol(unittest.TestCase):
 
     def test_positive_unequal(self):
         self.assertTrue(SortedSet([4, 5, 6]) != SortedSet([1, 2, 3]))
@@ -358,7 +358,8 @@ class TestSetOperationsMethods(unittest.TestCase):
 
 
 class TestSetProtocol(unittest.TestCase):
-
+    def test_protocol(self):
+        self.assertTrue(issubclass(SortedSet, Set))
     
 if __name__ == '__main__':
     unittest.main()
