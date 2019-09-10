@@ -53,11 +53,11 @@ class TestSizedProtocol(unittest.TestCase):
         self.assertEqual(len(s), 1)
 
     def test_ten(self):
-        s = SortedSet(rage(10))
+        s = SortedSet(range(10))
         self.assertEqual(len(s), 10)
     
     def test_with_duplicates(self):
-        s = sorted_set([5, 5, 5])
+        s = SortedSet([5, 5, 5])
         self.assertEqual(len(s), 1)
 
 
