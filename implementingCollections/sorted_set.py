@@ -1,6 +1,8 @@
-from collections.abc import Sequence
 
-class SortedSet(Sequence):
+# importing "bisect" for bisection operations 
+import bisect
+
+class SortedSet():
     def __init__(self, items = None):
         self._items = sorted(set(items)) if items is not None else []
     
@@ -11,7 +13,7 @@ class SortedSet(Sequence):
     """
     def __contains__(self, item):
         try:
-            self._item(index)
+            self.index(item)
             return True
         except ValueError:
             return False
@@ -68,7 +70,7 @@ class SortedSet(Sequence):
     #We know that the list inside our set is always sorted, we try to improve index search
     #We implement dindex method
     def index(self, item):
-        index = bisect_left(self._items, item)
+        index = bisect.bisect_left(self._items, item)
         if (index != len(self._items)) and (self._items[index] == item):
             return index
         raise ValueError("{} not found".format(repr(item)))
@@ -78,7 +80,6 @@ class SortedSet(Sequence):
     #We override the count implementation
     # so we should be able to perform a  binary search for the element in a time proportional to log n 
     def count(self, item):
-           
-        return int(item in self) 
+        return int(item in self._items) 
 
 
